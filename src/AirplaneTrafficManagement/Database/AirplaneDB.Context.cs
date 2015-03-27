@@ -34,5 +34,17 @@ namespace AirplaneTrafficManagement.Database
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
-    }
+
+
+        public AirplaneTrafficEntities(bool isProxyCreationEnabled)
+            : this()
+        {
+            // Disable lazy loading.
+            Configuration.LazyLoadingEnabled = false;
+            // Disable/Enable proxy object creation.
+            Configuration.ProxyCreationEnabled = isProxyCreationEnabled;
+
+            var context = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
+        }
+    }  
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirplaneTrafficManagement.Repo;
+using LightInject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,14 @@ namespace AirplaneTrafficManagement
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+             var container = new ServiceContainer();
+            container.RegisterControllers();        
+            
+            //mine
+            container.Register<IFlightRepository, FlightRepository>();
+
+            container.EnableMvc();
         }
     }
 }

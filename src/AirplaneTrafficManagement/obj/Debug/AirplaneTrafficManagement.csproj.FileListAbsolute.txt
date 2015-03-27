@@ -53,3 +53,12 @@ c:\users\diana.avirvarei\documents\visual studio 2013\Projects\AirplaneTrafficMa
 c:\users\diana.avirvarei\documents\visual studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\obj\Debug\AirplaneTrafficManagement.csprojResolveAssemblyReference.cache
 c:\users\diana.avirvarei\documents\visual studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\obj\Debug\AirplaneTrafficManagement.dll
 c:\users\diana.avirvarei\documents\visual studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\obj\Debug\AirplaneTrafficManagement.pdb
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.dll
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.Mvc.dll
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.Web.dll
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.pdb
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.xml
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.Mvc.pdb
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.Mvc.xml
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.Web.pdb
+C:\Users\diana.avirvarei\Documents\Visual Studio 2013\Projects\AirplaneTrafficManagement\AirplaneTrafficManagement\bin\LightInject.Web.xml
