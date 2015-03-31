@@ -18,6 +18,7 @@ namespace AirplaneTrafficManagement.Models
         public Nullable<int> infants { get; set; }
 
         public virtual ICollection<Client> Clients { get; set; }
+        public List<PassengerViewModel> _passengerList { get; set; }
         
     }
 }

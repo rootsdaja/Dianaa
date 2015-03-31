@@ -24,6 +24,13 @@ namespace AirplaneTrafficManagement
             
             //mine
             container.Register<IFlightRepository, FlightRepository>();
+            container.Register<IAirlineRepository, AirlineRepository>();
+            container.Register<IAirportRepository, AirportRepository>();
+            container.Register<IClientRepository, ClientRepository>();
+            container.Register<IPassengerRepository, PassengerRepository>();
+            container.Register<IRouteRepository, RouteRepository>();
+            container.Register<ITicketRepository, TicketRepository>();
+            container.Register<IUserTypeRepository, UserTypeRepository>();
 
             container.EnableMvc();
         }

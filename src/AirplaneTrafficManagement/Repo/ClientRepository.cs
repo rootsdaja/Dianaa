@@ -48,12 +48,14 @@ namespace AirplaneTrafficManagement.Repo
         public void InsertClient(Client client)
         {
             _context.Clients.Add(client);
+            _context.SaveChanges();
         }
 
         public void DeleteClient(int clientId)
         {
-            Client client = _context.Clients.Find(clientId);
+            var client = _context.Clients.Find(clientId);
             _context.Clients.Remove(client);
+            _context.SaveChanges();
         }
 
         public void UpdateClients(Client client)
@@ -63,6 +65,22 @@ namespace AirplaneTrafficManagement.Repo
 
         public void Save()
         {
+            _context.SaveChanges();
+        }
+
+        public void EditClientRepo(Client client)
+        {
+            var clientId = _context.Clients.FirstOrDefault(f => f.idClient == client.idClient);
+
+            clientId.idClient = client.idClient;
+            clientId.firstName = client.firstName;
+            clientId.lastName = client.lastName;
+            clientId.username = client.username;
+            clientId.password = client.password;
+            clientId.email = client.email;
+            clientId.phone = client.phone;
+            clientId.city = client.city;
+
             _context.SaveChanges();
         }
     }

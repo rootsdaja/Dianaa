@@ -4,7 +4,7 @@
 }
 
 
-@using (Html.BeginForm("AddFlights", "Flight"))
+@using (Html.BeginForm("AddFlight", "Flight"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
@@ -13,46 +13,30 @@
     @Html.HiddenFor(model => model.idAirport)
 
 
-    <style>
-        table, th, td {
-            border: 2px solid black;
-        }
+    <fieldset>
+        <legend>Add Flights Form </legend>
+        <ol>
+    <li>
+     @Html.LabelFor(m => m.departureFrom)
+    @Html.TextBoxFor(m => m.departureFrom)
+         </li>
+ 
+    <li>
+        @Html.LabelFor(m => m.arriveAt)
+        @Html.TextBoxFor(m => m.arriveAt)
+    </li>
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
+    <li>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.departOn)
+        </div>
 
-    <table style="width: 500px">
-        <tr>
-            <td><b>Departure From</b></td>
-            <td><b>Arrive At</b></td>
-            <td><b>Depart On</b></td>
-            <td><b>Return On</b></td>
-            <td><b>Time</b></td>
-        </tr>
-
-        <tr>
-            <td>
-                @Html.LabelFor(m => m.departureFrom)
-                @Html.TextBoxFor(m => m.departureFrom)
-            </td>
-            <td>
-                @Html.LabelFor(m => m.arriveAt)
-                @Html.TextBoxFor(m => m.arriveAt)
-            </td>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.departOn)
-                </div>
-
-                <div class="editor-filed">
-                    @Html.EditorFor(model => model.departOn)
-                    @Html.ValidationMessageFor(model => model.departOn)
-                </div>
-            </td>
-            <td>
+        <div class="editor-filed">
+            @Html.EditorFor(model => model.departOn)
+            @Html.ValidationMessageFor(model => model.departOn)
+        </div>
+    </li>
+            <li>
                 <div class="editor-label">
                     @Html.LabelFor(model => model.returnOn)
                 </div>
@@ -61,8 +45,8 @@
                     @Html.EditorFor(model => model.returnOn)
                     @Html.ValidationMessageFor(model => model.returnOn)
                 </div>
-            </td>
-            <td>
+            </li>
+            <li>
                 <div class="editor-label">
                     @Html.LabelFor(model => model.time)
                 </div>
@@ -72,11 +56,18 @@
                     @Html.ValidationMessageFor(model => model.time)
                 </div>
 
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="Add Flight" />
+            </li>
+    </ol>
+    </fieldset>
+    
+    <button id="button" value="Add">Add Flight</button>
+
 }
    
-    <p>@Html.ActionLink("Back to List", "Index")</p>
+@using (Html.BeginForm("Index", "Flight"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
 
+    <input type="submit" value="Back" />
+}

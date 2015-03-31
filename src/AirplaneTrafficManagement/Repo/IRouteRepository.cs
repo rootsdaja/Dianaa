@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AirplaneTrafficManagement.Repo
 {
-    interface IRouteRepository
+    public interface IRouteRepository
     {
         IEnumerable<Route> GetRoutes();
         Route GetRouteById(int id);
@@ -21,5 +21,6 @@ namespace AirplaneTrafficManagement.Repo
         void DeleteRoute(int routeId);
         void UpdateRoute(Route route);
         void Save();
+        void EditRouteRepo(Route route);
     }
 }

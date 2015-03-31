@@ -58,12 +58,14 @@ namespace AirplaneTrafficManagement.Repo
         public void InsertTicket(Ticket ticket)
         {
             _context.Tickets.Add(ticket);
+            _context.SaveChanges();
         }
 
         public void DeleteTicket(int ticketId)
         {
             Ticket ticket = _context.Tickets.Find(ticketId);
             _context.Tickets.Remove(ticket);
+            _context.SaveChanges();
         }
 
         public void UpdateTicket(Ticket ticket)
@@ -76,5 +78,18 @@ namespace AirplaneTrafficManagement.Repo
             _context.SaveChanges();
         }
 
+        public void EditTicketRepo(Ticket ticket)
+        {
+            var ticketId = _context.Tickets.FirstOrDefault(f => f.idTicket == ticket.idTicket);
+
+            ticketId.idTicket = ticket.idTicket;
+            ticketId.seat = ticket.seat;
+            ticketId.availableTickets = ticket.availableTickets;
+            ticketId.totalTickets = ticket.totalTickets;
+            ticketId.@class = ticket.@class;
+            ticketId.roundTrip = ticket.roundTrip;
+
+            _context.SaveChanges();
+        }
     }
 }

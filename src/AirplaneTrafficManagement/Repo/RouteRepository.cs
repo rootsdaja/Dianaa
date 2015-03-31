@@ -103,12 +103,14 @@ namespace AirplaneTrafficManagement.Repo
         public void InsertRoute(Route route)
         {
             _context.Routes.Add(route);
+            _context.SaveChanges();
         }
 
         public void DeleteRoute(int routeId)
         {
-            Route route = _context.Routes.Find(routeId);
+            var route = _context.Routes.Find(routeId);
             _context.Routes.Remove(route);
+            _context.SaveChanges();
         }
 
         public void UpdateRoute(Route route)
@@ -118,6 +120,19 @@ namespace AirplaneTrafficManagement.Repo
 
         public void Save()
         {
+            _context.SaveChanges();
+        }
+
+        public void EditRouteRepo(Route route)
+        {
+            var routeId = _context.Routes.FirstOrDefault(f => f.idRoute == route.idRoute);
+
+            routeId.idRoute = route.idRoute;
+            routeId.leavingFrom = route.leavingFrom;
+            routeId.goingTo = route.goingTo;
+            routeId.leavingHour = route.leavingHour;
+            routeId.arrivalHour = route.arrivalHour;
+
             _context.SaveChanges();
         }
 

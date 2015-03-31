@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirplaneTrafficManagement.Repo
 {
-    interface IClientRepository
+    public interface IClientRepository
     {
         IEnumerable<Client> GetClients();
         Client GetClientById(int id);
@@ -17,6 +17,7 @@ namespace AirplaneTrafficManagement.Repo
         void DeleteClient(int clientId);
         void UpdateClients(Client client);
         void Save();
+        void EditClientRepo(Client flight);
 
     }
 }

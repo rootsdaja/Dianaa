@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirplaneTrafficManagement.Repo
 {
-    interface IAirportRepository
+    public interface IAirportRepository
     {
         IEnumerable<Airport> GetAirports();
         Airport GetAirportById(int id);
@@ -22,6 +22,7 @@ namespace AirplaneTrafficManagement.Repo
         void DeleteAirport(int airportId);
         void UpdateAirport(Airport airport);
         void Save();
+        void EditAirportRepo(Airport airport);
 
     }
 }

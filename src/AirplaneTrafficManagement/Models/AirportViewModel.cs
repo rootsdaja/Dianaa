@@ -15,11 +15,15 @@ namespace AirplaneTrafficManagement.Models
         public string airportName { get; set; }
         [DisplayName("City")]
         public string city { get; set; }
+        [DisplayName("Country")]
+        public string country { get; set; }
         [DisplayName("State")]
         public string state { get; set; }
 
         public virtual ICollection<Flight> Flights { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
+
+        public List<AirportViewModel> _airportList { get; set; }
         
     }
 }

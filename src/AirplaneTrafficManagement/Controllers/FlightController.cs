@@ -45,13 +45,6 @@ namespace AirplaneTrafficManagement.Controllers
             return View(model);
         }
 
-        //public ActionResult Browse(string city)
-        //{
-        //    var flightModel = dbEntities.Flights.Include("City")
-        //        .Single(c => c.departureFrom == city);
-
-        //    return View(flightModel);
-        //}
 
         public ActionResult EditFlight(int id)
         {
@@ -91,14 +84,15 @@ namespace AirplaneTrafficManagement.Controllers
         }
 
         public ActionResult CreateFlight()
-        {
+       {
             return View("AddFlight", new FlightViewModel());
         }
 
-        public ActionResult AddFlights(FlightViewModel model)
+        public ActionResult AddFlight(FlightViewModel model)
         {
             var flight = new Flight();
 
+            flight.idFlight = model.idFlight;
             flight.departureFrom = model.departureFrom;
             flight.arriveAt = model.arriveAt;
             flight.departOn = model.departOn;
@@ -106,8 +100,17 @@ namespace AirplaneTrafficManagement.Controllers
             flight.time = model.time;
 
             _flightRepo.InsertFlight(flight);
-          
-            return View("Index", model);
+
+            return RedirectToAction("Index", model);
         }
+
+        public ActionResult DeleteFlight(int id)
+        {
+             _flightRepo.DeleteFlight(id);
+
+            return RedirectToAction("Index", "Flight");
+        }
+
+   
     }
 }

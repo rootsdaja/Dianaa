@@ -48,23 +48,38 @@ namespace AirplaneTrafficManagement.Repo
         public void InsertAirline(Airline airline)
         {
             _context.Airlines.Add(airline);
+            _context.SaveChanges();
         }
 
         public void DeleteAirline(int airlineId)
         {
-            Airline airline = _context.Airlines.Find(airlineId);
+            var airline = _context.Airlines.Find(airlineId);
             _context.Airlines.Remove(airline);
+            _context.SaveChanges();
         }
 
-        public void UpdateAirline(Airline airline)
+        public void EditAirlinetRepo(Airline airline)
         {
-            _context.Entry(airline).State = EntityState.Modified;
+            var airlineId = _context.Airlines.FirstOrDefault(f => f.idAirline == airline.idAirline);
+
+            airlineId.idAirline = airline.idAirline;
+            airlineId.companyName = airline.companyName;
+            airlineId.logo = airline.logo;
+
+            _context.SaveChanges();
         }
 
         public void Save()
         {
             _context.SaveChanges();
         }
-    
+
+
+
+
+        public void UpdateAirline(Airline airline)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

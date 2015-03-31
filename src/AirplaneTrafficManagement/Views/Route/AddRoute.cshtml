@@ -1,0 +1,50 @@
+﻿@model AirplaneTrafficManagement.Models.RouteViewModel
+@{
+    ViewBag.Title = "Add Route";
+}
+
+<script type="text/javascript" src="~/jquery/jquery-ui-timepicker-addon.js"></script>
+@using (Html.BeginForm("AddRoute", "Route"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    @Html.HiddenFor(model => model.idRoute)
+
+    <legend>Add Routes Form </legend>
+    <form class="form-inline">
+      
+        <div class="form-group">
+            @Html.LabelFor(m => m.leavingFrom, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.leavingFrom, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.goingTo, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.goingTo, new { @class = "form-control" })
+        </div>
+  
+        <div class="editor-label">
+            @Html.LabelFor(model => model.leavingHour, new { @class = "control-label" })
+            @Html.EditorFor(model => model.leavingHour, new { time_format ="HH:mm:ss PP", @class="form-control" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.arrivalHour, new { @class = "control-label" })
+            @Html.EditorFor(model => model.arrivalHour, new { time_format = "HH:mm:ss PP"})
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-default ">Add Route</button> 
+    </form>
+
+
+
+}
+
+@using (Html.BeginForm("Index", "Route"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <input type="submit" class="btn btn-default" value="Back" />
+}
+
+

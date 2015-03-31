@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirplaneTrafficManagement.Repo
 {
-    interface IAirlineRepository
+        public interface IAirlineRepository
     {
         IEnumerable<Airline> GetAirlines();
         Airline GetAirlineById(int id);
@@ -15,6 +15,7 @@ namespace AirplaneTrafficManagement.Repo
         List<Airline> SearchAirlineByCompanyName(string _searchValue);
         void InsertAirline(Airline airline);
         void DeleteAirline(int airlineId);
+        void EditAirlinetRepo(Airline airline);
         void UpdateAirline(Airline airline);
         void Save();
     }

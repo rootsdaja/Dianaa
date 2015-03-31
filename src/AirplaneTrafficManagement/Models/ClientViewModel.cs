@@ -32,5 +32,7 @@ namespace AirplaneTrafficManagement.Models
         public virtual Ticket Ticket { get; set; }
         public virtual UserType UserType { get; set; }
 
+        public List<ClientViewModel> _clientList { get; set; }
+
     }
 }

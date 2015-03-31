@@ -26,5 +26,7 @@ namespace AirplaneTrafficManagement.Models
         public virtual Airline Airline { get; set; }
         public virtual ICollection<Client> Clients { get; set; }
         public virtual Flight Flight { get; set; }
+
+        public List<TicketViewModel> _ticketList { get; set; }
     }
 }

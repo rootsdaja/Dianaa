@@ -65,8 +65,10 @@ namespace AirplaneTrafficManagement.Repo
 
         public void DeleteFlight(int flightId)
         {
-            Flight flight = _context.Flights.Find(flightId);
+            var flight = _context.Flights.Find(flightId);
+
             _context.Flights.Remove(flight);
+            _context.SaveChanges();
         }
 
         public void UpdateFlightRepo(Flight flight)

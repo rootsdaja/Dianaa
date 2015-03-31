@@ -93,12 +93,14 @@ namespace AirplaneTrafficManagement.Repo
         public void InsertAirport(Airport airport)
         {
             _context.Airports.Add(airport);
+            _context.SaveChanges();
         }
 
         public void DeleteAirport(int airportId)
         {
-            Airport airport = _context.Airports.Find(airportId);
+            var airport = _context.Airports.Find(airportId);
             _context.Airports.Remove(airport);
+            _context.SaveChanges();
         }
 
         public void UpdateAirport(Airport airport)
@@ -111,5 +113,17 @@ namespace AirplaneTrafficManagement.Repo
             _context.SaveChanges();
         }
 
+        public void EditAirportRepo(Airport airport)
+        {
+            var airportId = _context.Airports.FirstOrDefault(f => f.idAirport == airport.idAirport);
+
+            airportId.idAirport = airport.idAirport;
+            airportId.airportName = airport.airportName;
+            airportId.city = airport.city;
+            airportId.country = airport.country;
+            airportId.state = airport.state;
+
+            _context.SaveChanges();
+        }
     }
 }
