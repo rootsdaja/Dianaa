@@ -190,6 +190,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AirplaneDB.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\AirplaneDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AirplaneDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\AirplaneDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

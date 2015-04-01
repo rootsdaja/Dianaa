@@ -24,28 +24,18 @@ namespace AirplaneTrafficManagement.Controllers
         public ActionResult Index()
         {
             var model = new FlightViewModel();
-            model._flightList = new List<FlightViewModel>();
+           // var airport = new AirportRepository();
+            
+           
+            //model.FlightList = flightList;
+            var flightList = _flightRepo.GetFlights();
+            //var departList = airport.GetAirports();
+            model.FlightList = flightList;
+            //model.AirportList = departList;
 
-            var flight = new Flight();
-
-            var flightListRepo = _flightRepo.GetFlights();
-            foreach(var item in flightListRepo)
-            {
-                var flightModel = new FlightViewModel();
-
-                flightModel.idFlight = item.idFlight;
-                flightModel.departureFrom = item.departureFrom;
-                flightModel.arriveAt = item.arriveAt;
-                flightModel.departOn = item.departOn;
-                flightModel.returnOn = item.returnOn;
-                flightModel.time = item.time;
-
-                model._flightList.Add(flightModel);
-            }
             return View(model);
         }
-
-
+ 
         public ActionResult EditFlight(int id)
         {
             var getFlightById = _flightRepo.GetFlightById(id);
@@ -62,12 +52,18 @@ namespace AirplaneTrafficManagement.Controllers
             flightModel.arriveAt = getFlightById.arriveAt;
             flightModel.departOn = getFlightById.departOn;
             flightModel.returnOn = getFlightById.returnOn;
-            flightModel.time = getFlightById.time;
+
+            var flightList = _flightRepo.GetFlights();
+            flightModel.FlightList = flightList;
+
+            //var airportRepo = new AirportRepository();
+            //airportRepo.GetAirports();
+
 
             return View("EditFlight", flightModel);  
         }
 
-        public ActionResult saveChanges(FlightViewModel model)
+        public ActionResult SaveChanges(FlightViewModel model)
         {
             var flight = new Flight();
 
@@ -76,9 +72,10 @@ namespace AirplaneTrafficManagement.Controllers
             flight.arriveAt = model.arriveAt;
             flight.departOn = model.departOn;
             flight.returnOn = model.returnOn;
-            flight.time = model.time;
 
             _flightRepo.EditFlightRepo(flight);
+
+        
 
             return RedirectToAction("Index", "Flight");
         }
@@ -97,7 +94,6 @@ namespace AirplaneTrafficManagement.Controllers
             flight.arriveAt = model.arriveAt;
             flight.departOn = model.departOn;
             flight.returnOn = model.returnOn;
-            flight.time = model.time;
 
             _flightRepo.InsertFlight(flight);
 

@@ -31,13 +31,13 @@ namespace AirplaneTrafficManagement.Repo
             return _context.Flights.Find(id);
         }
 
-        public List<Flight> GetFlightByDeparture(string departure)
+        public List<Flight> GetFlightByDeparture(int departure)
         {
             var flight = _context.Flights.Where(f => f.departureFrom == departure).ToList();
             return flight;
         }
 
-        public List<Flight> GetFlightByDepartureAndArrivalLocation(string depart, string arrive)
+        public List<Flight> GetFlightByDepartureAndArrivalLocation(int depart, int arrive)
         {
             var flight = _context.Flights.Where(f => f.departureFrom == depart && f.arriveAt == arrive).ToList();
             return flight;
@@ -49,11 +49,11 @@ namespace AirplaneTrafficManagement.Repo
         //    return cityByCountry;
         //}
 
-        public List<Flight> SearchFlightByDepartureAndArrival(string _searchValue)
-        {
-            var flight = _context.Flights.Where(f => f.departureFrom.StartsWith(_searchValue) && f.arriveAt.StartsWith(_searchValue)).ToList();
-            return flight;
-        }
+        //public List<Flight> SearchFlightByDepartureAndArrival(int _searchValue)
+        //{
+        //    var flight = _context.Flights.Where(f => f.departureFrom.StartsWith(_searchValue) && f.arriveAt.StartsWith(_searchValue)).ToList();
+        //    return flight;
+        //}
   
         //----------------------------------------------ADMIN FUNCTIONALITIES-----------------//
 
@@ -85,7 +85,6 @@ namespace AirplaneTrafficManagement.Repo
             flightId.arriveAt = flight.arriveAt;
             flightId.departOn = flight.departOn;
             flightId.returnOn = flight.returnOn;
-            flightId.time = flight.time;
 
             _context.SaveChanges();
         }
@@ -94,5 +93,6 @@ namespace AirplaneTrafficManagement.Repo
         {
             _context.SaveChanges();
         }
+
     }
 }

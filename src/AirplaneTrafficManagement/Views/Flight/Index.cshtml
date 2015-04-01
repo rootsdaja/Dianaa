@@ -70,18 +70,17 @@
         <td><b>Arrive At</b></td>
         <td><b>Depart On</b></td>
         <td><b>Return On</b></td>
-        <td><b>Time</b></td>
         <td><b>Options</b></td>
     </tr>
 
-    @foreach (var item in Model._flightList)
+    @foreach (var item in Model.FlightList)
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.idFlight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.departureFrom)
+                @Html.DisplayFor(modelItem => item.departureFrom)           
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.arriveAt)
@@ -91,9 +90,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.returnOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.time)
             </td>
             <td>
                 @*@{var session = new Common.WebSessionContext();

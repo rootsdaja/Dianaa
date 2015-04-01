@@ -23,7 +23,8 @@ namespace AirplaneTrafficManagement.Models
         public virtual ICollection<Flight> Flights { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
 
-        public List<AirportViewModel> _airportList { get; set; }
+        //public List<AirportViewModel> _airportList { get; set; }
+        public IEnumerable<Airport> AirportList { get; set; }
         
     }
 }

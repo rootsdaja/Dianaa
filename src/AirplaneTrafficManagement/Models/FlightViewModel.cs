@@ -14,11 +14,11 @@ namespace AirplaneTrafficManagement.Models
        
         public int idFlight { get; set; }
 
-        [DisplayName("Departure From")]
-        public string departureFrom { get; set; }
+        [Display(Name = "Departure From")]
+        public int? departureFrom { get; set; }
 
-        [DisplayName("Arrive At")]
-        public string arriveAt { get; set; }
+        [Display(Name = "Arrive At")]
+        public int? arriveAt { get; set; }
 
         [DisplayName("Depart On")]
         [DataType(DataType.Date)]
@@ -28,10 +28,6 @@ namespace AirplaneTrafficManagement.Models
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> returnOn { get; set; }
 
-        [DisplayName("Depart Hour")]
-        [DataType(DataType.Time)]
-        public Nullable<System.TimeSpan> time { get; set; }
-
         public Nullable<int> idAirport { get; set; }
         public Nullable<int> idRoute { get; set; }
 
@@ -39,8 +35,24 @@ namespace AirplaneTrafficManagement.Models
         public virtual Route Route { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
 
-        public List<FlightViewModel> _flightList { get; set; }
-        public List<SelectListItem> FlightList { get; set; }
+        public IEnumerable<Flight> FlightList { get; set; }
+        public IEnumerable<Airport> AirportList { get; set; }
+
+        public IEnumerable<SelectListItem> DepartureItems
+        {
+            get
+            {
+                return new SelectList(AirportList, "idAirport", "airportName");
+            }
+        }
+
+        public IEnumerable<SelectListItem> ArrivalItems
+        {
+            get
+            {
+                return new SelectList(AirportList, "idFlight", "arriveAt");
+            }
+        }
 
         //[Display(Name = "Search")]
         //public string _searchValue { get; set; }
