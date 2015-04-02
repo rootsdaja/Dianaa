@@ -21,9 +21,9 @@ public partial class Airport
     public Airport()
     {
 
-        this.Flights = new HashSet<Flight>();
+        this.DepartureFlight = new HashSet<Flight>();
 
-        this.Flights1 = new HashSet<Flight>();
+        this.ArrivalFlights = new HashSet<Flight>();
 
         this.Routes = new HashSet<Route>();
 
@@ -42,9 +42,9 @@ public partial class Airport
 
 
 
-    public virtual ICollection<Flight> Flights { get; set; }
+    public virtual ICollection<Flight> DepartureFlight { get; set; }
 
-    public virtual ICollection<Flight> Flights1 { get; set; }
+    public virtual ICollection<Flight> ArrivalFlights { get; set; }
 
     public virtual ICollection<Route> Routes { get; set; }
 

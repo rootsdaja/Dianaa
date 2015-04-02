@@ -15,14 +15,12 @@
     <form class="form-inline">
  
         <div class="form-group">
-            @Html.LabelFor(p => p.departureFrom, new { @class = "control-label" })
-            @Html.DropDownListFor(p => p.Airport.airportName, Model.DepartureItems, "--Select--", new { @class = "form-control" })
-            @Html.ValidationMessageFor(p => p.Airport.airportName)    
+            @Html.LabelFor(p => p.DepartureFromId, new { @class = "control-label" })
+            @Html.DropDownList("DepartureFromId", null, new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(p => p.arriveAt, new { @class = "control-label" })
-            @Html.DropDownListFor(p => p.arriveAt, Model.ArrivalItems, "--Select--", new { @class = "form-control" })
-            @Html.ValidationMessageFor(p => p.arriveAt)
+            @Html.LabelFor(p => p.ArrivalAtId, new { @class = "control-label" })
+            @Html.DropDownList("ArrivalAtId", null, new { @class = "form-control" })
          </div>
 
         <div class="form-group">

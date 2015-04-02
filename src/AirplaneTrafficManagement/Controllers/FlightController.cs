@@ -12,68 +12,57 @@ namespace AirplaneTrafficManagement.Controllers
     public class FlightController : Controller
     {
         IFlightRepository _flightRepo;
+        IAirportRepository _airportRepo;
 
-        //Prin constructorul asta, tu tot ce faci in controller, se ataseaza la constructor
-        //si apoi la Interfata si din interfata in Repositoryul asociat interfetei
-        public FlightController(IFlightRepository repo)
+        public FlightController(IFlightRepository repo, IAirportRepository airportRepo)
         {
             _flightRepo = repo;
+            _airportRepo = airportRepo;
         }
-
+        
         // GET: Airplane
         public ActionResult Index()
         {
-            var model = new FlightViewModel();
-           // var airport = new AirportRepository();
-            
-           
-            //model.FlightList = flightList;
             var flightList = _flightRepo.GetFlights();
-            //var departList = airport.GetAirports();
-            model.FlightList = flightList;
-            //model.AirportList = departList;
 
-            return View(model);
+            return View(flightList);
         }
  
         public ActionResult EditFlight(int id)
         {
-            var getFlightById = _flightRepo.GetFlightById(id);
+            var flight = _flightRepo.GetFlightById(id);
+            var airportList = _airportRepo.GetAirports();
 
-            if(getFlightById == null)
+            if (flight == null)
             {
                 return HttpNotFound();
             }
 
             var flightModel = new FlightViewModel();
 
-            flightModel.idFlight = getFlightById.idFlight;
-            flightModel.departureFrom = getFlightById.departureFrom;
-            flightModel.arriveAt = getFlightById.arriveAt;
-            flightModel.departOn = getFlightById.departOn;
-            flightModel.returnOn = getFlightById.returnOn;
-
-            var flightList = _flightRepo.GetFlights();
-            flightModel.FlightList = flightList;
-
-            //var airportRepo = new AirportRepository();
-            //airportRepo.GetAirports();
+            flightModel.idFlight = flight.idFlight;
+            flightModel.DepartureFromId = flight.departureFrom ?? 0;
+            flightModel.ArrivalAtId = flight.arriveAt ?? 0;
+            flightModel.departOn = flight.departOn;
+            flightModel.returnOn = flight.returnOn;
 
 
+            ViewBag.DepartureFromId = new SelectList(airportList, "idAirport", "airportName", flight.departureFrom);
+            ViewBag.ArrivalAtId = new SelectList(airportList, "idAirport", "airportName", flight.arriveAt);
+    
             return View("EditFlight", flightModel);  
         }
 
         public ActionResult SaveChanges(FlightViewModel model)
         {
-            var flight = new Flight();
+            var flight = _flightRepo.GetFlightById(model.idFlight);
 
-            flight.idFlight = model.idFlight;
-            flight.departureFrom = model.departureFrom;
-            flight.arriveAt = model.arriveAt;
+            flight.departureFrom = model.DepartureFromId;
+            flight.arriveAt = model.ArrivalAtId;
             flight.departOn = model.departOn;
             flight.returnOn = model.returnOn;
 
-            _flightRepo.EditFlightRepo(flight);
+            _flightRepo.Save();
 
         
 
@@ -88,12 +77,19 @@ namespace AirplaneTrafficManagement.Controllers
         public ActionResult AddFlight(FlightViewModel model)
         {
             var flight = new Flight();
+            var airportList = _airportRepo.GetAirports();
 
-            flight.idFlight = model.idFlight;
-            flight.departureFrom = model.departureFrom;
-            flight.arriveAt = model.arriveAt;
+            //flight.idFlight = model.idFlight;
+            //flight.departureFrom = model.DepartureFromId;
+            //flight.arriveAt = model.ArrivalAtId;
+            flight.departureFrom = model.DepartureFromId;
+            //flight.Arrival.airportName = model.ArrivalAtAirport.airportName;
+            flight.arriveAt = model.ArrivalAtId;
             flight.departOn = model.departOn;
             flight.returnOn = model.returnOn;
+
+            ViewBag.DepartureFromId = new SelectList(airportList, "idAirport", "airportName", flight.departureFrom);
+            ViewBag.ArrivalAtId = new SelectList(airportList, "idAirport", "airportName", flight.arriveAt);
 
             _flightRepo.InsertFlight(flight);
 

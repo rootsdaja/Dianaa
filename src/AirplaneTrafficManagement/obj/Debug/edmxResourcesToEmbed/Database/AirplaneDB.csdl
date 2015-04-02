@@ -71,8 +71,8 @@
     <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Flights" Relationship="AirplaneTrafficModel.FK_Flight_Airport" FromRole="Airport" ToRole="Flight" />
-    <NavigationProperty Name="Flights1" Relationship="AirplaneTrafficModel.FK_Flight_Airport1" FromRole="Airport" ToRole="Flight" />
+    <NavigationProperty Name="DepartureFlight" Relationship="AirplaneTrafficModel.FK_Flight_Airport" FromRole="Airport" ToRole="Flight" />
+    <NavigationProperty Name="ArrivalFlights" Relationship="AirplaneTrafficModel.FK_Flight_Airport1" FromRole="Airport" ToRole="Flight" />
     <NavigationProperty Name="Routes" Relationship="AirplaneTrafficModel.FK_Route_Airport" FromRole="Airport" ToRole="Route" />
   </EntityType>
   <EntityType Name="Client">
@@ -109,8 +109,8 @@
     <Property Name="idAirline" Type="Int32" />
     <Property Name="departureFrom" Type="Int32" />
     <Property Name="arriveAt" Type="Int32" />
-    <NavigationProperty Name="Airport" Relationship="AirplaneTrafficModel.FK_Flight_Airport" FromRole="Flight" ToRole="Airport" />
-    <NavigationProperty Name="Airport1" Relationship="AirplaneTrafficModel.FK_Flight_Airport1" FromRole="Flight" ToRole="Airport" />
+    <NavigationProperty Name="Departure" Relationship="AirplaneTrafficModel.FK_Flight_Airport" FromRole="Flight" ToRole="Airport" />
+    <NavigationProperty Name="Arrival" Relationship="AirplaneTrafficModel.FK_Flight_Airport1" FromRole="Flight" ToRole="Airport" />
   </EntityType>
   <EntityType Name="Passenger">
     <Key>

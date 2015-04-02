@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AirplaneTrafficManagement.Repo
 {
@@ -80,11 +81,10 @@ namespace AirplaneTrafficManagement.Repo
         {
             var flightId = _context.Flights.FirstOrDefault(f => f.idFlight == flight.idFlight);
 
-            flightId.idFlight = flight.idFlight;
-            flightId.departureFrom = flight.departureFrom;
-            flightId.arriveAt = flight.arriveAt;
             flightId.departOn = flight.departOn;
             flightId.returnOn = flight.returnOn;
+            flightId.departureFrom = flight.departureFrom;
+            flightId.arriveAt = flight.arriveAt;
 
             _context.SaveChanges();
         }

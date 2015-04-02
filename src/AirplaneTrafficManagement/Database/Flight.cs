@@ -36,9 +36,9 @@ public partial class Flight
 
 
 
-    public virtual Airport Airport { get; set; }
+    public virtual Airport Departure { get; set; }
 
-    public virtual Airport Airport1 { get; set; }
+    public virtual Airport Arrival { get; set; }
 
 }
 

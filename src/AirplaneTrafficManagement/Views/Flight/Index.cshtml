@@ -1,4 +1,4 @@
-﻿@model AirplaneTrafficManagement.Models.FlightViewModel
+﻿@model IEnumerable<AirplaneTrafficManagement.Database.Flight>
 @{
     ViewBag.Title = "Flights Search Page";
 }
@@ -66,24 +66,25 @@
         <table style="width: 800px" class="table table-bordered table-hover">
     <tr>
         <td><b>Id Flight</b></td>
-        <td><b>Departure From</b></td>
-        <td><b>Arrive At</b></td>
+        <td><b>Depart Airport Location</b></td>
+        <td><b>Arrival Airport Location</b></td>
         <td><b>Depart On</b></td>
         <td><b>Return On</b></td>
+     
         <td><b>Options</b></td>
     </tr>
 
-    @foreach (var item in Model.FlightList)
+    @foreach (AirplaneTrafficManagement.Database.Flight item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.idFlight)
+                @Html.DisplayFor(model => item.idFlight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.departureFrom)           
+                @Html.DisplayFor(model => item.Departure.airportName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.arriveAt)
+                @Html.DisplayFor(model => item.Arrival.airportName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.departOn)
@@ -91,6 +92,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.returnOn)
             </td>
+          
             <td>
                 @*@{var session = new Common.WebSessionContext();
                     }
