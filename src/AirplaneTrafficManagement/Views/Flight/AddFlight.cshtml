@@ -19,23 +19,21 @@
         <div class="form-group">
             @Html.LabelFor(p => p.DepartureFromId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(p => p.DepartureFromAirport.airportName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(p => p.DepartureFromAirport.airportName, "", new { @class = "text-danger" })
+                @Html.EditorFor(p => p.DepartureFromAirport.airportName, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(p => p.ArrivalAtId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(p => p.ArrivalAtAirport.airportName, null, new { @class = "form-control" })
-                @Html.ValidationMessageFor(p => p.ArrivalAtAirport.airportName, "", new { @class = "text-danger" })
+                @Html.EditorFor(p => p.ArrivalAtAirport.airportName, new { htmlAttributes = new { @class = "form-control" } })      
             </div>
         </div>
 
        <div class="form-group">
                @Html.LabelFor(model => model.departOn, new { @class = "control-label col-md-2" })
            <div class="col-md-10">
-               @Html.EditorFor(model => model.departOn, new { @class = "form-control" })
+               @Html.EditorFor(model => model.departOn, new { htmlAttributes = new { @class = "form-control" } })
                @Html.ValidationMessageFor(model => model.departOn, "", new { @class = "text-danger" })
            </div>
         </div>

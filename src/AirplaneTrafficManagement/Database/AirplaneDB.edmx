@@ -95,6 +95,7 @@
           <Property Name="roundTrip" Type="bit" />
           <Property Name="idAirline" Type="int" />
           <Property Name="idFlight" Type="int" />
+          <Property Name="idPassenger" Type="int" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -103,18 +104,6 @@
           <Property Name="idUserType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="admin" Type="bit" />
         </EntityType>
-        <Association Name="FK_Client_Client">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="Client1" Type="Self.Client" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="idClient" />
-            </Principal>
-            <Dependent Role="Client1">
-              <PropertyRef Name="idClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Client_Passenger">
           <End Role="Passenger" Type="Self.Passenger" Multiplicity="0..1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
@@ -199,6 +188,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Ticket_Flight">
+          <End Role="Flight" Type="Self.Flight" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="idFlight" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="idFlight" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="idPassenger" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="idPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AirplaneTrafficModelStoreContainer">
           <EntitySet Name="Airline" EntityType="Self.Airline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Airport" EntityType="Self.Airport" Schema="dbo" store:Type="Tables" />
@@ -209,10 +222,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Client_Client" Association="Self.FK_Client_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Client1" EntitySet="Client" />
-          </AssociationSet>
           <AssociationSet Name="FK_Client_Passenger" Association="Self.FK_Client_Passenger">
             <End Role="Passenger" EntitySet="Passenger" />
             <End Role="Client" EntitySet="Client" />
@@ -239,6 +248,14 @@
           </AssociationSet>
           <AssociationSet Name="FK_Ticket_Airline" Association="Self.FK_Ticket_Airline">
             <End Role="Airline" EntitySet="Airline" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Flight" Association="Self.FK_Ticket_Flight">
+            <End Role="Flight" EntitySet="Flight" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Passenger" Association="Self.FK_Ticket_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
         </EntityContainer>
@@ -297,6 +314,18 @@
           <AssociationSet Name="FK_Client_UserType" Association="AirplaneTrafficModel.FK_Client_UserType">
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Flight" Association="AirplaneTrafficModel.FK_Ticket_Flight">
+            <End Role="Flight" EntitySet="Flights" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_Ticket" Association="AirplaneTrafficModel.FK_Passenger_Ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Passenger" EntitySet="Passengers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Passenger" Association="AirplaneTrafficModel.FK_Ticket_Passenger">
+            <End Role="Passenger" EntitySet="Passengers" />
+            <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Airline">
@@ -357,6 +386,7 @@
           <Property Name="arriveAt" Type="Int32" />
           <NavigationProperty Name="Departure" Relationship="AirplaneTrafficModel.FK_Flight_Airport" FromRole="Flight" ToRole="Airport" />
           <NavigationProperty Name="Arrival" Relationship="AirplaneTrafficModel.FK_Flight_Airport1" FromRole="Flight" ToRole="Airport" />
+          <NavigationProperty Name="Tickets" Relationship="AirplaneTrafficModel.FK_Ticket_Flight" FromRole="Flight" ToRole="Ticket" />
         </EntityType>
         <EntityType Name="Passenger">
           <Key>
@@ -367,6 +397,9 @@
           <Property Name="children" Type="Int32" />
           <Property Name="infants" Type="Int32" />
           <NavigationProperty Name="Clients" Relationship="AirplaneTrafficModel.FK_Client_Passenger" FromRole="Passenger" ToRole="Client" />
+          <Property Name="idTicket" Type="Int32" />
+          <NavigationProperty Name="Ticket" Relationship="AirplaneTrafficModel.FK_Passenger_Ticket" FromRole="Passenger" ToRole="Ticket" />
+          <NavigationProperty Name="Tickets" Relationship="AirplaneTrafficModel.FK_Ticket_Passenger" FromRole="Passenger" ToRole="Ticket" />
         </EntityType>
         <EntityType Name="Route">
           <Key>
@@ -394,6 +427,9 @@
           <Property Name="idFlight" Type="Int32" />
           <NavigationProperty Name="Airline" Relationship="AirplaneTrafficModel.FK_Ticket_Airline" FromRole="Ticket" ToRole="Airline" />
           <NavigationProperty Name="Clients" Relationship="AirplaneTrafficModel.FK_Client_Ticket" FromRole="Ticket" ToRole="Client" />
+          <NavigationProperty Name="Flight" Relationship="AirplaneTrafficModel.FK_Ticket_Flight" FromRole="Ticket" ToRole="Flight" />
+          <Property Name="idPassenger" Type="Int32" />
+          <NavigationProperty Name="Passenger" Relationship="AirplaneTrafficModel.FK_Ticket_Passenger" FromRole="Ticket" ToRole="Passenger" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -499,6 +535,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Ticket_Flight">
+          <End Type="AirplaneTrafficModel.Flight" Role="Flight" Multiplicity="0..1" />
+          <End Type="AirplaneTrafficModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="idFlight" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="idFlight" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_Ticket">
+          <End Type="AirplaneTrafficModel.Ticket" Role="Ticket" Multiplicity="0..1" />
+          <End Type="AirplaneTrafficModel.Passenger" Role="Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="idTicket" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="idTicket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Passenger">
+          <End Type="AirplaneTrafficModel.Passenger" Role="Passenger" Multiplicity="0..1" />
+          <End Type="AirplaneTrafficModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="idPassenger" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="idPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -576,6 +648,10 @@
                 <ScalarProperty Name="adult" ColumnName="adult" />
                 <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
               </MappingFragment>
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
+                <ScalarProperty Name="idTicket" ColumnName="idTicket" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Routes">
@@ -593,6 +669,7 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="AirplaneTrafficModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
                 <ScalarProperty Name="idFlight" ColumnName="idFlight" />
                 <ScalarProperty Name="idAirline" ColumnName="idAirline" />
                 <ScalarProperty Name="roundTrip" ColumnName="roundTrip" />

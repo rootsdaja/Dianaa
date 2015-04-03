@@ -72,6 +72,10 @@
           <ScalarProperty Name="adult" ColumnName="adult" />
           <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
         </MappingFragment>
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
+          <ScalarProperty Name="idTicket" ColumnName="idTicket" />
+        </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Routes">
@@ -89,6 +93,7 @@
     <EntitySetMapping Name="Tickets">
       <EntityTypeMapping TypeName="AirplaneTrafficModel.Ticket">
         <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
           <ScalarProperty Name="idFlight" ColumnName="idFlight" />
           <ScalarProperty Name="idAirline" ColumnName="idAirline" />
           <ScalarProperty Name="roundTrip" ColumnName="roundTrip" />

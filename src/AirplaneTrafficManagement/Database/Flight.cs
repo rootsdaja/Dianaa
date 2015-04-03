@@ -18,6 +18,14 @@ using System;
 public partial class Flight
 {
 
+    public Flight()
+    {
+
+        this.Tickets = new HashSet<Ticket>();
+
+    }
+
+
     public int idFlight { get; set; }
 
     public Nullable<System.DateTime> departOn { get; set; }
@@ -39,6 +47,8 @@ public partial class Flight
     public virtual Airport Departure { get; set; }
 
     public virtual Airport Arrival { get; set; }
+
+    public virtual ICollection<Ticket> Tickets { get; set; }
 
 }
 

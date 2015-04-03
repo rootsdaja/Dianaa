@@ -22,24 +22,8 @@ namespace AirplaneTrafficManagement.Controllers
          // GET: Passenger
         public ActionResult Index()
         {
-            var model = new PassengerViewModel();
-            model._passengerList = new List<PassengerViewModel>();
-
-            var passenger = new Passenger();
-            var passListRepo = _passengerRepository.GetPassengers();
-
-            foreach(var item in passListRepo)
-            {
-                var passengerModel = new PassengerViewModel();
-
-                passengerModel.idPassenger = item.idPassenger;
-                passengerModel.adult = item.adult;
-                passengerModel.children = item.children;
-                passengerModel.infants = item.infants;
-                
-                passengerModel._passengerList.Add(passengerModel);
-            }
-            return View(model);
+            var flightList = _passengerRepository.GetPassengers();
+            return View(flightList);       
         }
 
 

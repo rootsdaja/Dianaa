@@ -12,34 +12,90 @@ namespace AirplaneTrafficManagement.Controllers
     public class TicketController : Controller
     {
         ITicketRepository _ticketRepository;
+        IAirportRepository _airportRepo;
+        IPassengerRepository _passengerRepo;
+        IAirlineRepository _airlineRepo;
+        IFlightRepository _flightRepo;
 
-        public TicketController(ITicketRepository repo)
+        public TicketController(ITicketRepository repo, IAirlineRepository airlineRepo,
+            IAirportRepository airportRepo, IPassengerRepository passRepo, IFlightRepository flightRepo)
         {
             _ticketRepository = repo;
+            _airlineRepo = airlineRepo;
+            _passengerRepo = passRepo;
+            _airportRepo = airportRepo;
+            _flightRepo = flightRepo;
         }
 
            // GET: Ticket
         public ActionResult Index()
         {
-            var model = new TicketViewModel();
-            model._ticketList = new List<TicketViewModel>();
+            var model = new BookTicketsViewModel();
+            model.TicketList = new List<BookTicketsViewModel>();   
+ 
+            var ticketList = _ticketRepository.GetTickets();
+            var airlineList = _airlineRepo.GetAirlines();
+            var aiportList = _airportRepo.GetAirports();
+            var passengerList = _passengerRepo.GetPassengers();
+            var flightList = _flightRepo.GetFlights();
 
-            var ticket = new Ticket();
-            var ticketListRepo = _ticketRepository.GetTickets();
-
-            foreach(var item in ticketListRepo)
+            foreach(var item in ticketList)
             {
-                var ticketModel = new TicketViewModel();
+                var bookingModel = new BookTicketsViewModel();
 
-                ticketModel.idTicket = item.idTicket;
-                ticketModel.seat = item.seat;
-                ticketModel.availableTickets = item.availableTickets;
-                ticketModel.totalTickets = item.totalTickets;
-                ticketModel.@class = item.@class;
-                ticketModel.roundTrip = item.roundTrip;     
-                
-                model._ticketList.Add(ticketModel);
+                bookingModel.idTicket = item.idTicket;
+                bookingModel.roundTrip = item.roundTrip;
+                bookingModel.seat = item.seat;
+                bookingModel.@class = item.@class;
+
+                model.TicketList.Add(bookingModel);
             }
+
+            foreach(var item in airlineList)
+            {
+                var bookingModel = new BookTicketsViewModel();
+
+                bookingModel.companyName = item.companyName;
+                bookingModel.idAirline = item.idAirline;
+                bookingModel.logo = item.logo;
+
+                model.TicketList.Add(bookingModel);
+            }
+
+            foreach (var item in flightList)
+            {
+                var bookingModel = new BookTicketsViewModel();
+
+                bookingModel.DepartureFromId = item.departureFrom ?? 0;
+                bookingModel.ArrivalAtId = item.arriveAt ?? 0;
+                bookingModel.departOn = item.departOn;
+                bookingModel.returnOn = item.returnOn;
+
+                model.TicketList.Add(bookingModel);
+            }
+
+            foreach(var item in airlineList)
+            {
+                var bookingModel = new BookTicketsViewModel();
+
+                bookingModel.companyName = item.companyName;
+                bookingModel.logo = item.logo;
+
+                model.TicketList.Add(bookingModel);
+            }
+
+            foreach(var item in passengerList)
+            {
+                var bookingModel = new BookTicketsViewModel();
+
+                bookingModel.adult = item.adult;
+                bookingModel.children = item.children;
+                bookingModel.infants = item.infants;
+
+                model.TicketList.Add(bookingModel);
+            }
+            
+            
             return View(model);
         }
 

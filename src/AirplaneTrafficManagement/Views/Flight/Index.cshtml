@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AirplaneTrafficManagement.Database.Flight>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Flights Search Page";
 }
@@ -51,27 +52,14 @@
                 <div id="divNoOfMovies"></div>*@
 
 
-
-        <style>
-            table, th, td {
-                border: 2px solid black;
-            }
-
-            th, td {
-                padding: 15px;
-            }
-        </style>
-
-
-        <table style="width: 800px" class="table table-bordered table-hover">
+   <table class="table table-bordered table-hover">
     <tr>
-        <td><b>Id Flight</b></td>
-        <td><b>Depart Airport Location</b></td>
-        <td><b>Arrival Airport Location</b></td>
-        <td><b>Depart On</b></td>
-        <td><b>Return On</b></td>
-     
-        <td><b>Options</b></td>
+        <th><b>Id Flight</b></th>
+        <th><b>Depart Airport Location</b></th>
+        <th><b>Arrival Airport Location</b></th>
+        <th><b>Depart On</b></th>
+        <th><b>Return On</b></th>
+        <th><b>Options</b></th>
     </tr>
 
     @foreach (AirplaneTrafficManagement.Database.Flight item in Model)
@@ -99,9 +87,9 @@
 
                     @if (session.Admin == true)
                     {*@
-                <p>@Html.ActionLink("Edit Flight", "EditFlight", "Flight", new { id = item.idFlight }, null) </p>
-                <p>@Html.ActionLink("Delete Flight", "DeleteFlight", "Flight", new { id = item.idFlight }, null)</p>
-                <p>@Html.ActionLink("Add Flight", "CreateFlight", "Flight", null) </p>
+               @Html.ActionLink("Edit", "EditFlight", "Flight", new { id = item.idFlight }, null) |
+               @Html.ActionLink("Delete", "DeleteFlight", "Flight", new { id = item.idFlight }, null) |
+               @Html.ActionLink("Add", "CreateFlight", "Flight", null) 
 
                 @*<p>@Html.ActionLink("Movie Details", "movieDetail", "Flight", new { id_detail = item.idFlight }, null)</p>*@
                 @*}
@@ -115,6 +103,7 @@
         </tr>
     }
 </table>
+
 
 
 

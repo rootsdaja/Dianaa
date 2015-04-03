@@ -11,11 +11,6 @@ namespace AirplaneTrafficManagement.Repo
     {
         private AirplaneTrafficEntities _context;
 
-        //public FlightRepository(AirplaneTrafficEntities context)
-        //{
-        //    this.context = context;
-        //}
-
         public AirportRepository()
         {
             _context = new AirplaneTrafficEntities();
@@ -30,7 +25,6 @@ namespace AirplaneTrafficManagement.Repo
         {
             return _context.Airports.Find(id);
         }
-
 
         public List<Airport> GetAirportsByName(string name)
         {
@@ -99,7 +93,10 @@ namespace AirplaneTrafficManagement.Repo
         public void DeleteAirport(int airportId)
         {
             var airport = _context.Airports.Find(airportId);
+            var flight = _context.Flights.Find(airportId);
+
             _context.Airports.Remove(airport);
+            _context.Flights.Remove(flight);
             _context.SaveChanges();
         }
 

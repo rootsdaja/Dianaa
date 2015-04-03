@@ -22,6 +22,9 @@
         <AssociationConnector Association="AirplaneTrafficModel.FK_Client_Passenger" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Client_Ticket" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Client_UserType" />
+        <AssociationConnector Association="AirplaneTrafficModel.FK_Ticket_Flight" />
+        <AssociationConnector Association="AirplaneTrafficModel.FK_Passenger_Ticket" />
+        <AssociationConnector Association="AirplaneTrafficModel.FK_Ticket_Passenger" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

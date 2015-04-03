@@ -1,50 +1,59 @@
-﻿@model AirplaneTrafficManagement.Models.TicketViewModel
+﻿@model IEnumerable<AirplaneTrafficManagement.Models.BookTicketsViewModel>
 @{
     ViewBag.Title = "Ticket Search Page";
 }
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Display all the Tickets.</h2>
+    <h2>Travel Search</h2>
+    Add nav-bar for Flights
 </hgroup>
-<style>
-    table, th, td {
-        border: 2px solid black;
-    }
 
-    th, td {
-        padding: 15px;
-    }
-</style>
-<table style="width: 800px" class="table table-bordered table-hover">
+<table class="table table-bordered table-hover">
     <tr>
-        <td><b>Id Ticket</b></td>
+        <th><b>RoundTrip</b></th> @*CheckBox*@
+        <th><b>Depart From</b></th> @*ListOfCountries ---> ListOfCities --->ListOfAirports*@
+        <th><b>Arrive At</b></th> 
+        <th><b>Depart On</b></th>
+        <th><b>Return On</b></th>
+        <th><b>Passengers</b></th> 
         <td><b>Seat Number</b></td>
-        <td><b>Available Tickets</b></td>
-        <td><b>Total Number of Tickets</b></td>
-        <td><b>Class</b></td>
-        <td><b>RoundTrip</b></td>
-        <td><b>Options</b></td>
+        <td><b>Class</b></td> @*DropDownClass*@
+        <th><b>Airline</b></th> @*DropDownAirline*@
+        @*<td><b>Options</b></td>Available just for ADMIN*@
     </tr>
-    @foreach (var item in Model._ticketList)
+
+    @foreach (AirplaneTrafficManagement.Models.BookTicketsViewModel item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.idTicket)
+                @Html.DisplayFor(modelItem => item.roundTrip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureFromId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalAtId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.departOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.returnOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.adult)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.children)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.infants)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.seat)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.availableTickets)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.totalTickets)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.@class)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.roundTrip)
+                @Html.DisplayFor(modelItem => item.companyName)
             </td>
             <td>
                 @*@{var session = new Common.WebSessionContext();
@@ -52,9 +61,9 @@
 
                     @if (session.Admin == true)
                     {*@
-                <p>@Html.ActionLink("Edit Ticket", "EditTicket", "Ticket", new { id = item.idTicket }, null) </p>
-                <p>@Html.ActionLink("Delete Ticket", "DeleteTicket", "Ticket", new { id = item.idTicket }, null)</p>
-                <p>@Html.ActionLink("Add Ticket", "CreateTicket", "Ticket", null) </p>
+                @Html.ActionLink("Edit", "EditTicket", "Ticket", new { id = item.idTicket }, null) |
+                @Html.ActionLink("Delete", "DeleteTicket", "Ticket", new { id = item.idTicket }, null) |
+                @Html.ActionLink("Add", "CreateTicket", "Ticket", null)
                 @*<p>@Html.ActionLink("Movie Details", "movieDetail", "Flight", new { id_detail = item.idFlight }, null)</p>*@
                 @*}
 

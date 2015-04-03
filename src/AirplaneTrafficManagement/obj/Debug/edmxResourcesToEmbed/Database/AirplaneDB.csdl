@@ -52,6 +52,18 @@
       <End Role="UserType" EntitySet="UserTypes" />
       <End Role="Client" EntitySet="Clients" />
     </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Flight" Association="AirplaneTrafficModel.FK_Ticket_Flight">
+      <End Role="Flight" EntitySet="Flights" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Passenger_Ticket" Association="AirplaneTrafficModel.FK_Passenger_Ticket">
+      <End Role="Ticket" EntitySet="Tickets" />
+      <End Role="Passenger" EntitySet="Passengers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Passenger" Association="AirplaneTrafficModel.FK_Ticket_Passenger">
+      <End Role="Passenger" EntitySet="Passengers" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Airline">
     <Key>
@@ -111,6 +123,7 @@
     <Property Name="arriveAt" Type="Int32" />
     <NavigationProperty Name="Departure" Relationship="AirplaneTrafficModel.FK_Flight_Airport" FromRole="Flight" ToRole="Airport" />
     <NavigationProperty Name="Arrival" Relationship="AirplaneTrafficModel.FK_Flight_Airport1" FromRole="Flight" ToRole="Airport" />
+    <NavigationProperty Name="Tickets" Relationship="AirplaneTrafficModel.FK_Ticket_Flight" FromRole="Flight" ToRole="Ticket" />
   </EntityType>
   <EntityType Name="Passenger">
     <Key>
@@ -121,6 +134,9 @@
     <Property Name="children" Type="Int32" />
     <Property Name="infants" Type="Int32" />
     <NavigationProperty Name="Clients" Relationship="AirplaneTrafficModel.FK_Client_Passenger" FromRole="Passenger" ToRole="Client" />
+    <Property Name="idTicket" Type="Int32" />
+    <NavigationProperty Name="Ticket" Relationship="AirplaneTrafficModel.FK_Passenger_Ticket" FromRole="Passenger" ToRole="Ticket" />
+    <NavigationProperty Name="Tickets" Relationship="AirplaneTrafficModel.FK_Ticket_Passenger" FromRole="Passenger" ToRole="Ticket" />
   </EntityType>
   <EntityType Name="Route">
     <Key>
@@ -148,6 +164,9 @@
     <Property Name="idFlight" Type="Int32" />
     <NavigationProperty Name="Airline" Relationship="AirplaneTrafficModel.FK_Ticket_Airline" FromRole="Ticket" ToRole="Airline" />
     <NavigationProperty Name="Clients" Relationship="AirplaneTrafficModel.FK_Client_Ticket" FromRole="Ticket" ToRole="Client" />
+    <NavigationProperty Name="Flight" Relationship="AirplaneTrafficModel.FK_Ticket_Flight" FromRole="Ticket" ToRole="Flight" />
+    <Property Name="idPassenger" Type="Int32" />
+    <NavigationProperty Name="Passenger" Relationship="AirplaneTrafficModel.FK_Ticket_Passenger" FromRole="Ticket" ToRole="Passenger" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>
@@ -250,6 +269,42 @@
       </Principal>
       <Dependent Role="Client">
         <PropertyRef Name="idUserType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Flight">
+    <End Type="AirplaneTrafficModel.Flight" Role="Flight" Multiplicity="0..1" />
+    <End Type="AirplaneTrafficModel.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="idFlight" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="idFlight" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Passenger_Ticket">
+    <End Type="AirplaneTrafficModel.Ticket" Role="Ticket" Multiplicity="0..1" />
+    <End Type="AirplaneTrafficModel.Passenger" Role="Passenger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="idTicket" />
+      </Principal>
+      <Dependent Role="Passenger">
+        <PropertyRef Name="idTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Passenger">
+    <End Type="AirplaneTrafficModel.Passenger" Role="Passenger" Multiplicity="0..1" />
+    <End Type="AirplaneTrafficModel.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Passenger">
+        <PropertyRef Name="idPassenger" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="idPassenger" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

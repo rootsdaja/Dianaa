@@ -42,11 +42,17 @@ public partial class Ticket
 
     public Nullable<int> idFlight { get; set; }
 
+    public Nullable<int> idPassenger { get; set; }
+
 
 
     public virtual Airline Airline { get; set; }
 
     public virtual ICollection<Client> Clients { get; set; }
+
+    public virtual Flight Flight { get; set; }
+
+    public virtual Passenger Passenger { get; set; }
 
 }
 
