@@ -32,23 +32,23 @@ public partial class AirplaneTrafficEntities : DbContext
     }
 
 
-    public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+    public virtual DbSet<Airline> Airline { get; set; }
 
-    public virtual DbSet<Airline> Airlines { get; set; }
+    public virtual DbSet<Airport> Airport { get; set; }
 
-    public virtual DbSet<Airport> Airports { get; set; }
+    public virtual DbSet<Client> Client { get; set; }
 
-    public virtual DbSet<Client> Clients { get; set; }
+    public virtual DbSet<Flight> Flight { get; set; }
 
-    public virtual DbSet<Flight> Flights { get; set; }
+    public virtual DbSet<Passenger> Passenger { get; set; }
 
-    public virtual DbSet<Passenger> Passengers { get; set; }
+    public virtual DbSet<Route> Route { get; set; }
 
-    public virtual DbSet<Route> Routes { get; set; }
+    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
-    public virtual DbSet<Ticket> Tickets { get; set; }
+    public virtual DbSet<Ticket> Ticket { get; set; }
 
-    public virtual DbSet<UserType> UserTypes { get; set; }
+    public virtual DbSet<UserType> UserType { get; set; }
 
 }
 

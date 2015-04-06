@@ -21,9 +21,9 @@ public partial class Passenger
     public Passenger()
     {
 
-        this.Clients = new HashSet<Client>();
+        this.Client = new HashSet<Client>();
 
-        this.Tickets = new HashSet<Ticket>();
+        this.Ticket = new HashSet<Ticket>();
 
     }
 
@@ -36,15 +36,11 @@ public partial class Passenger
 
     public Nullable<int> infants { get; set; }
 
-    public Nullable<int> idTicket { get; set; }
 
 
+    public virtual ICollection<Client> Client { get; set; }
 
-    public virtual ICollection<Client> Clients { get; set; }
-
-    public virtual Ticket Ticket { get; set; }
-
-    public virtual ICollection<Ticket> Tickets { get; set; }
+    public virtual ICollection<Ticket> Ticket { get; set; }
 
 }
 

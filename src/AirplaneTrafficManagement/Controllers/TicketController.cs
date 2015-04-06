@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace AirplaneTrafficManagement.Controllers
 {
     public class TicketController : Controller
     {
-        ITicketRepository _ticketRepository;
+        ITicketRepository _ticketRepo;
         IAirportRepository _airportRepo;
         IPassengerRepository _passengerRepo;
         IAirlineRepository _airlineRepo;
@@ -20,7 +21,7 @@ namespace AirplaneTrafficManagement.Controllers
         public TicketController(ITicketRepository repo, IAirlineRepository airlineRepo,
             IAirportRepository airportRepo, IPassengerRepository passRepo, IFlightRepository flightRepo)
         {
-            _ticketRepository = repo;
+            _ticketRepo = repo;
             _airlineRepo = airlineRepo;
             _passengerRepo = passRepo;
             _airportRepo = airportRepo;
@@ -30,79 +31,64 @@ namespace AirplaneTrafficManagement.Controllers
            // GET: Ticket
         public ActionResult Index()
         {
-            var model = new BookTicketsViewModel();
-            model.TicketList = new List<BookTicketsViewModel>();   
- 
-            var ticketList = _ticketRepository.GetTickets();
+            var ticketList = _ticketRepo.GetTickets();
+            //var airlineList = _airlineRepo.GetAirlines();
+            //var aiportList = _airportRepo.GetAirports();
+            //var passengerList = _passengerRepo.GetPassengers();
+            //var flightList = _flightRepo.GetFlights();
+
+            return View(ticketList);
+        }
+
+
+        public ActionResult Create()
+        {
+            var airportList = _airportRepo.GetAirports();
             var airlineList = _airlineRepo.GetAirlines();
-            var aiportList = _airportRepo.GetAirports();
-            var passengerList = _passengerRepo.GetPassengers();
-            var flightList = _flightRepo.GetFlights();
+            var ticketList = _ticketRepo.GetTickets();
 
-            foreach(var item in ticketList)
-            {
-                var bookingModel = new BookTicketsViewModel();
+            var flight = new Flight();
+            var airline = new Airline();
+            var ticket = new Ticket();
 
-                bookingModel.idTicket = item.idTicket;
-                bookingModel.roundTrip = item.roundTrip;
-                bookingModel.seat = item.seat;
-                bookingModel.@class = item.@class;
+            ViewBag.DepartureFromId = new SelectList(airportList, "idAirport", "airportName", flight.departureFrom);
+            ViewBag.ArrivalAtId = new SelectList(airportList, "idAirport", "airportName", flight.arriveAt);
+            ViewBag.AirlineId = new SelectList(airlineList, "idAirline", "companyName", airline.idAirline);
+            ViewBag.Class = new SelectList(ticketList, "idTicket", "Class", ticket.idTicket);
 
-                model.TicketList.Add(bookingModel);
-            }
+            return View("BookFlight", new BookTicketsViewModel());
+        }
 
-            foreach(var item in airlineList)
-            {
-                var bookingModel = new BookTicketsViewModel();
+        public ActionResult Add(BookTicketsViewModel model)
+        {
+            var flight = new Flight();
+            var airline = new Airline();
+            var passenger = new Passenger();
+            var ticket = new Ticket();
 
-                bookingModel.companyName = item.companyName;
-                bookingModel.idAirline = item.idAirline;
-                bookingModel.logo = item.logo;
+            flight.departureFrom = model.DepartureFromId;
+            flight.arriveAt = model.ArrivalAtId;
+            flight.departOn = model.DepartOn;
+            flight.returnOn = model.ReturnOn;
 
-                model.TicketList.Add(bookingModel);
-            }
+            ticket.idTicket = model.idTicket;
+            ticket.roundTrip = model.RoundTrip;
+            ticket.seat = model.Seat;
+            ticket.@class = model.Class;
 
-            foreach (var item in flightList)
-            {
-                var bookingModel = new BookTicketsViewModel();
+            passenger.adult = model.Adult;
+            passenger.children = model.Children;
+            passenger.infants = model.Infant;
 
-                bookingModel.DepartureFromId = item.departureFrom ?? 0;
-                bookingModel.ArrivalAtId = item.arriveAt ?? 0;
-                bookingModel.departOn = item.departOn;
-                bookingModel.returnOn = item.returnOn;
-
-                model.TicketList.Add(bookingModel);
-            }
-
-            foreach(var item in airlineList)
-            {
-                var bookingModel = new BookTicketsViewModel();
-
-                bookingModel.companyName = item.companyName;
-                bookingModel.logo = item.logo;
-
-                model.TicketList.Add(bookingModel);
-            }
-
-            foreach(var item in passengerList)
-            {
-                var bookingModel = new BookTicketsViewModel();
-
-                bookingModel.adult = item.adult;
-                bookingModel.children = item.children;
-                bookingModel.infants = item.infants;
-
-                model.TicketList.Add(bookingModel);
-            }
-            
-            
-            return View(model);
+            airline.idAirline = model.AirlineId;
+         
+            return View("BookFlight", model);
         }
 
 
         public ActionResult EditTicket(int id)
         {
-            var getTicketById = _ticketRepository.GetTicketById(id);
+            var getTicketById = _ticketRepo.GetTicketById(id);
 
             if(getTicketById == null)
             {
@@ -132,7 +118,7 @@ namespace AirplaneTrafficManagement.Controllers
             ticket.@class = model.@class;
             ticket.roundTrip = model.roundTrip;
 
-            _ticketRepository.EditTicketRepo(ticket);
+            _ticketRepo.EditTicketRepo(ticket);
 
             return RedirectToAction("Index", "Ticket");
         }
@@ -153,14 +139,14 @@ namespace AirplaneTrafficManagement.Controllers
             ticket.@class = model.@class;
             ticket.roundTrip = model.roundTrip;
 
-            _ticketRepository.InsertTicket(ticket);
+            _ticketRepo.InsertTicket(ticket);
 
             return RedirectToAction("Index", model);
         }
 
         public ActionResult DeleteTicket(int id)
         {
-             _ticketRepository.DeleteTicket(id);
+            _ticketRepo.DeleteTicket(id);
 
             return RedirectToAction("Index", "Ticket");
         }

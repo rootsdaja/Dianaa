@@ -21,7 +21,7 @@ public partial class UserType
     public UserType()
     {
 
-        this.Clients = new HashSet<Client>();
+        this.Client = new HashSet<Client>();
 
     }
 
@@ -32,7 +32,7 @@ public partial class UserType
 
 
 
-    public virtual ICollection<Client> Clients { get; set; }
+    public virtual ICollection<Client> Client { get; set; }
 
 }
 

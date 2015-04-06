@@ -68,7 +68,7 @@ namespace AirplaneTrafficManagement.Controllers
         }
 
         public ActionResult CreateFlight()
-       {
+        {
             return View("AddFlight", new FlightViewModel());
         }
 
@@ -96,6 +96,8 @@ namespace AirplaneTrafficManagement.Controllers
 
             flight.Departure = airportDeparture;
             flight.Arrival = airportArrival;
+            //flight.Airport.airportName = airportDeparture;
+            //flight.Airport1.airportName = airportArrival;
             flight.departOn = model.departOn;
             flight.returnOn = model.returnOn;
             

@@ -18,25 +18,25 @@ namespace AirplaneTrafficManagement.Repo
 
         public IEnumerable<UserType> GetUserTypes()
         {
-            return _context.UserTypes.ToList();
+            return _context.UserType.ToList();
         }
 
         public UserType GetUserTypesById(int id)
         {
-            return _context.UserTypes.Find(id);
+            return _context.UserType.Find(id);
         }
 
         //----------------------------------------------ADMIN FUNCTIONALITIES-----------------//
 
         public void InsertUserType(UserType user)
         {
-            _context.UserTypes.Add(user);
+            _context.UserType.Add(user);
         }
 
         public void DeleteUserType(int Id)
         {
-            UserType user = _context.UserTypes.Find(Id);
-            _context.UserTypes.Remove(user);
+            UserType user = _context.UserType.Find(Id);
+            _context.UserType.Remove(user);
         }
 
         public void UpdateUserType(UserType user)

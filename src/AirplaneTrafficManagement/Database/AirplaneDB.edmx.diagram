@@ -5,27 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0d681893bd7a418cb8db14220d8bcdd5" Name="Diagram1">
-        <EntityTypeShape EntityType="AirplaneTrafficModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.Airline" Width="1.5" PointX="3.375" PointY="2.25" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.Airport" Width="1.5" PointX="8.375" PointY="9" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.Client" Width="1.5" PointX="7.875" PointY="1" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.Flight" Width="1.5" PointX="10.625" PointY="10.25" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.Passenger" Width="1.5" PointX="5.625" PointY="6" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.Route" Width="1.5" PointX="10.625" PointY="7.125" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.Ticket" Width="1.5" PointX="5.625" PointY="1.75" />
-        <EntityTypeShape EntityType="AirplaneTrafficModel.UserType" Width="1.5" PointX="5.625" PointY="9.75" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.Airline" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.Airport" Width="1.5" PointX="0.75" PointY="3.375" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.Client" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.Flight" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.Passenger" Width="1.5" PointX="3" PointY="11.25" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.Route" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.Ticket" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="AirplaneTrafficModel.UserType" Width="1.5" PointX="5.25" PointY="7.375" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Ticket_Airline" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Flight_Airport" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Flight_Airport1" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Route_Airport" />
-        <AssociationConnector Association="AirplaneTrafficModel.FK_Client_Client" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Client_Passenger" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Client_Ticket" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Client_UserType" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Ticket_Flight" />
-        <AssociationConnector Association="AirplaneTrafficModel.FK_Passenger_Ticket" />
         <AssociationConnector Association="AirplaneTrafficModel.FK_Ticket_Passenger" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

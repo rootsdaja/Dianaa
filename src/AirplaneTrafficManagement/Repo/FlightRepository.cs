@@ -12,11 +12,6 @@ namespace AirplaneTrafficManagement.Repo
     {
         private AirplaneTrafficEntities _context;
 
-        //public FlightRepository(AirplaneTrafficEntities context)
-        //{
-        //    this.context = context;
-        //}
-
         public FlightRepository()
         {
             _context = new AirplaneTrafficEntities();
@@ -24,23 +19,23 @@ namespace AirplaneTrafficManagement.Repo
 
         public IEnumerable<Flight> GetFlights()
         {
-            return _context.Flights.ToList();
+            return _context.Flight.ToList();
         }
 
         public Flight GetFlightById(int id)
         {
-            return _context.Flights.Find(id);
+            return _context.Flight.Find(id);
         }
 
         public List<Flight> GetFlightByDeparture(int departure)
         {
-            var flight = _context.Flights.Where(f => f.departureFrom == departure).ToList();
+            var flight = _context.Flight.Where(f => f.departureFrom == departure).ToList();
             return flight;
         }
 
         public List<Flight> GetFlightByDepartureAndArrivalLocation(int depart, int arrive)
         {
-            var flight = _context.Flights.Where(f => f.departureFrom == depart && f.arriveAt == arrive).ToList();
+            var flight = _context.Flight.Where(f => f.departureFrom == depart && f.arriveAt == arrive).ToList();
             return flight;
         }
 
@@ -60,15 +55,15 @@ namespace AirplaneTrafficManagement.Repo
 
         public void InsertFlight(Flight flight)
         {
-            _context.Flights.Add(flight);
+            _context.Flight.Add(flight);
             _context.SaveChanges();
         }
 
         public void DeleteFlight(int flightId)
         {
-            var flight = _context.Flights.Find(flightId);
+            var flight = _context.Flight.Find(flightId);
 
-            _context.Flights.Remove(flight);
+            _context.Flight.Remove(flight);
             _context.SaveChanges();
         }
 
@@ -79,7 +74,7 @@ namespace AirplaneTrafficManagement.Repo
 
         public void EditFlightRepo(Flight flight)
         {
-            var flightId = _context.Flights.FirstOrDefault(f => f.idFlight == flight.idFlight);
+            var flightId = _context.Flight.FirstOrDefault(f => f.idFlight == flight.idFlight);
 
             flightId.departOn = flight.departOn;
             flightId.returnOn = flight.returnOn;

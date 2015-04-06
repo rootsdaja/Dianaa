@@ -21,7 +21,7 @@ public partial class Airline
     public Airline()
     {
 
-        this.Tickets = new HashSet<Ticket>();
+        this.Ticket = new HashSet<Ticket>();
 
     }
 
@@ -34,7 +34,7 @@ public partial class Airline
 
 
 
-    public virtual ICollection<Ticket> Tickets { get; set; }
+    public virtual ICollection<Ticket> Ticket { get; set; }
 
 }
 

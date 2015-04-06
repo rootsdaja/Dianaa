@@ -1,0 +1,68 @@
+﻿@model AirplaneTrafficManagement.Models.BookTicketsViewModel
+@{
+    ViewBag.Title = "Edit Tickets";
+}
+
+<h2>BookFlight</h2>
+
+
+@using (Html.BeginForm("Add", "Ticket"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    @Html.HiddenFor(m => m.idTicket)
+
+    <form class="form-inline">  
+        <div class="form-group">
+            <div class="radio">
+                @Html.LabelFor(model => model.RoundTrip)
+                @Html.RadioButtonFor(model => model.RoundTrip, "false")
+                @Html.RadioButtonFor(model => model.RoundTrip, "true")
+            </div>
+        </div>
+            <div>
+                @Html.LabelFor(p => p.DepartureFromId, new { @class = "control-label" })
+                @Html.DropDownList("DepartureFromId", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ArrivalAtId, new { @class = "control-label" })
+                @Html.DropDownList("ArrivalAtId", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DepartOn, new { @class = "control-label" })
+                @Html.EditorFor(model => model.DepartOn, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartOn)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ReturnOn, new { @class = "control-label" })
+                @Html.EditorFor(model => model.ReturnOn, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ReturnOn)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Adult, new { @class = "control-label" })
+                @Html.EditorFor(model => model.Adult, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Children, new { @class = "control-label" })
+                @Html.EditorFor(model => model.Children, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Infant, new { @class = "control-label" } )
+                @Html.EditorFor(model => model.Infant, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Seat, new { @class = "control-label" })
+                @Html.EditorFor(model => model.Seat, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Class, new { @class = "control-label" })
+                @Html.DropDownList("Class", null, new { @class = "form-control"})
+            </div>
+            <div>
+                @Html.LabelFor(model => model.AirlineId, new { @class = "control-label" })
+                @Html.DropDownList("AirlineId", null, new { @class="form-control"})
+            </div>
+        <button type="submit" value="Book" class="btn-default">Book</button>
+</form>
+
+}

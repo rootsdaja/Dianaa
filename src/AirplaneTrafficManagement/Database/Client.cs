@@ -44,10 +44,6 @@ public partial class Client
 
 
 
-    public virtual Client Client1 { get; set; }
-
-    public virtual Client Client2 { get; set; }
-
     public virtual Passenger Passenger { get; set; }
 
     public virtual Ticket Ticket { get; set; }
