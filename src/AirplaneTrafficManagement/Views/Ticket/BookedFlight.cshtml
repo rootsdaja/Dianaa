@@ -1,0 +1,34 @@
+﻿@model IEnumerable<AirplaneTrafficManagement.Database.Flight>
+@{
+    ViewBag.Title = "BookedFlight";
+}
+
+<h2>List of Flights according to your location and dates match</h2>
+
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <td><b>Depart From</b></td>
+        <td><b>Arrive At</b></td>
+        <td><b>Depart On</b></td>
+        <td><b>Return On</b></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(model => item.departureFrom)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.arriveAt)
+            </th>
+            <td>
+                @Html.DisplayFor(model => item.departOn)
+            </td>
+            <th>
+                @Html.DisplayFor(model => item.returnOn)
+            </th>       
+          </tr>
+    }
+</table>

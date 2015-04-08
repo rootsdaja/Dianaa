@@ -354,6 +354,7 @@
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Ticket\AddTicket.cshtml" />
     <Content Include="Views\Ticket\BookFlight.cshtml" />
+    <Content Include="Views\Ticket\BookedFlight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

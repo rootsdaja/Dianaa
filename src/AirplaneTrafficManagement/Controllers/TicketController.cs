@@ -32,11 +32,6 @@ namespace AirplaneTrafficManagement.Controllers
         public ActionResult Index()
         {
             var ticketList = _ticketRepo.GetTickets();
-            //var airlineList = _airlineRepo.GetAirlines();
-            //var aiportList = _airportRepo.GetAirports();
-            //var passengerList = _passengerRepo.GetPassengers();
-            //var flightList = _flightRepo.GetFlights();
-
             return View(ticketList);
         }
 
@@ -65,6 +60,7 @@ namespace AirplaneTrafficManagement.Controllers
             var airline = new Airline();
             var passenger = new Passenger();
             var ticket = new Ticket();
+            var airportDepature = new Airport();
 
             flight.departureFrom = model.DepartureFromId;
             flight.arriveAt = model.ArrivalAtId;
@@ -81,10 +77,29 @@ namespace AirplaneTrafficManagement.Controllers
             passenger.infants = model.Infant;
 
             airline.idAirline = model.AirlineId;
+
+            _flightRepo.InsertFlight(flight);
+            _ticketRepo.InsertTicket(ticket);
+            _passengerRepo.InsertPassenger(passenger);
+            _airlineRepo.InsertAirline(airline);
          
             return View("BookFlight", model);
         }
 
+        public ActionResult FindFlights(BookTicketsViewModel model)
+        {
+            var flight = new Flight();
+
+            flight.departureFrom = model.DepartureFromId;
+            flight.arriveAt = model.ArrivalAtId;
+            flight.departOn = model.DepartOn;
+            flight.returnOn = model.ReturnOn;
+
+            _flightRepo.GetFlightByDepartureAndArrivalHour(model.DepartOn, model.ReturnOn);
+            _flightRepo.GetFlightByDepartureAndArrivalLocation(model.DepartureFromId, model.ArrivalAtId);
+
+            return View("BookedFlight", model);
+        }
 
         public ActionResult EditTicket(int id)
         {
@@ -150,5 +165,6 @@ namespace AirplaneTrafficManagement.Controllers
 
             return RedirectToAction("Index", "Ticket");
         }
+
     }
 }

@@ -31,13 +31,14 @@ namespace AirplaneTrafficManagement.Models
         [DisplayName("Depart On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<DateTime> DepartOn { get; set; }
-        [DisplayName("Return On")]
+        public DateTime DepartOn { get; set; }
 
+        [DisplayName("Return On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<DateTime> ReturnOn { get; set; }
+        public DateTime ReturnOn { get; set; }
 
+        [Display(Name="Airline")]
         public int AirlineId { get; set; }
         public int ClassId { get; set; }
 

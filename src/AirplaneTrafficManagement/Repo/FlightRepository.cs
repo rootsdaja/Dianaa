@@ -39,6 +39,12 @@ namespace AirplaneTrafficManagement.Repo
             return flight;
         }
 
+        public IEnumerable<Flight> GetFlightByDepartureAndArrivalHour(DateTime arrivalHour, DateTime departureHour)
+        {
+            var flight = _context.Flight.Where(f => f.departOn.Equals(departureHour) && f.returnOn.Equals(arrivalHour));
+            return flight;
+        }
+
         //public List<Flight> GetCityByCountry(string city, string country)
         //{
         //    var cityByCountry = _context.Flights.Where(c => c.Airport.city == city && c.Airport.country == country).ToList();

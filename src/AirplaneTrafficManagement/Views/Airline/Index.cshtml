@@ -1,4 +1,4 @@
-﻿@model AirplaneTrafficManagement.Models.AirlineViewModel
+﻿@model IEnumerable<AirplaneTrafficManagement.Database.Airline>
 @{
     ViewBag.Title = "Airline";
 }
@@ -65,17 +65,17 @@
         <td><b>Options</b></td>
     </tr>
 
-    @foreach (var item in Model._airlineList)
+    @foreach (AirplaneTrafficManagement.Database.Airline item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.idAirline)
+                @*@Html.DisplayFor(modelItem => item.idAirline)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.companyName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.logo)
+                @Html.DisplayFor(modelItem => item.logo)*@
             </td>
             <td>
                 @*@{var session = new Common.WebSessionContext();
