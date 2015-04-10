@@ -91,6 +91,7 @@
     <Property Name="idAirline" Type="int" />
     <Property Name="idFlight" Type="int" />
     <Property Name="idPassenger" Type="int" />
+    <Property Name="price" Type="float" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>

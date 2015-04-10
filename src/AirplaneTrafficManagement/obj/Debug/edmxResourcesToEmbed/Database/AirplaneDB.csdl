@@ -155,6 +155,7 @@
     <NavigationProperty Name="Client" Relationship="AirplaneTrafficModel.FK_Client_Ticket" FromRole="Ticket" ToRole="Client" />
     <NavigationProperty Name="Flight" Relationship="AirplaneTrafficModel.FK_Ticket_Flight" FromRole="Ticket" ToRole="Flight" />
     <NavigationProperty Name="Passenger" Relationship="AirplaneTrafficModel.FK_Ticket_Passenger" FromRole="Ticket" ToRole="Passenger" />
+    <Property Name="price" Type="Double" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>

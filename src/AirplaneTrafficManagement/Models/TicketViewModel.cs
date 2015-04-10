@@ -30,6 +30,9 @@ namespace AirplaneTrafficManagement.Models
         [DisplayName("Round trip")]
         public Nullable<bool> roundTrip { get; set; }
 
+        [DisplayName("Price")]
+        public double Price { get; set; } 
+
         public virtual Airline Airline { get; set; }
         public virtual ICollection<Client> Clients { get; set; }
         public virtual Flight Flight { get; set; }

@@ -51,16 +51,32 @@ namespace AirplaneTrafficManagement.Controllers
             ViewBag.AirlineId = new SelectList(airlineList, "idAirline", "companyName", airline.idAirline);
             ViewBag.Class = new SelectList(ticketList, "idTicket", "Class", ticket.idTicket);
 
-            return View("BookFlight", new BookTicketsViewModel());
+            return View("AddBookFlight", new BookTicketsViewModel());
         }
 
         public ActionResult Add(BookTicketsViewModel model)
         {
+            var vmTicket = new Ticket();
+
             var flight = new Flight();
             var airline = new Airline();
             var passenger = new Passenger();
             var ticket = new Ticket();
             var airportDepature = new Airport();
+
+            var airportList = _airportRepo.GetAirports();
+            var airlineList = _airlineRepo.GetAirlines();
+            var ticketList = _ticketRepo.GetTickets();
+
+            ViewBag.DepartureFromId = new SelectList(airportList, "idAirport", "airportName", flight.departureFrom);
+            ViewBag.ArrivalAtId = new SelectList(airportList, "idAirport", "airportName", flight.arriveAt);
+            ViewBag.AirlineId = new SelectList(airlineList, "idAirline", "companyName", airline.idAirline);
+            ViewBag.Class = new SelectList(ticketList, "idTicket", "Class", ticket.idTicket);
+
+            //var 
+            //var controller = new FlightController(_flightRepo, _airportRepo);
+
+            //controller.AddFlight(model);
 
             flight.departureFrom = model.DepartureFromId;
             flight.arriveAt = model.ArrivalAtId;
@@ -71,6 +87,7 @@ namespace AirplaneTrafficManagement.Controllers
             ticket.roundTrip = model.RoundTrip;
             ticket.seat = model.Seat;
             ticket.@class = model.Class;
+            ticket.price = model.Price;
 
             passenger.adult = model.Adult;
             passenger.children = model.Children;
@@ -82,23 +99,43 @@ namespace AirplaneTrafficManagement.Controllers
             _ticketRepo.InsertTicket(ticket);
             _passengerRepo.InsertPassenger(passenger);
             _airlineRepo.InsertAirline(airline);
-         
-            return View("BookFlight", model);
+
+            vmTicket.Flight = flight;
+            vmTicket.roundTrip = ticket.roundTrip;
+            vmTicket.seat = ticket.seat;
+            vmTicket.@class = ticket.@class;
+            vmTicket.Passenger = passenger;
+            vmTicket.Airline = airline;
+
+            return RedirectToAction("FindFlights", model);
+
         }
 
         public ActionResult FindFlights(BookTicketsViewModel model)
         {
             var flight = new Flight();
+            var airportList = _airportRepo.GetAirports();
 
+            ViewBag.DepartureFromId = new SelectList(airportList, "idAirport", "airportName", flight.departureFrom);
+            ViewBag.ArrivalAtId = new SelectList(airportList, "idAirport", "airportName", flight.arriveAt);
+
+            _flightRepo.GetFlightByDepartureAndArrivalHour(model.DepartOn, model.ReturnOn);
+            _flightRepo.GetFlightByDepartureAndArrivalLocation(model.DepartureFromId, model.ArrivalAtId);
+            //_flightRepo.GetFlightByDepartureAndArrivalLocation(ViewBag.DepartureFromId, ViewBag.ArrivalAtId);
+
+
+            //Ca sa adaugi si pretul, adauga in DB in FLIGHT un camp nou cu price, care o sa fie
+            //acelasi cu pretul de pe tichet si-i faci display
+
+            //flight.departureFrom = ViewBag.DepartureFromId;
+            //flight.arriveAt = ViewBag.ArrivalAtId;
             flight.departureFrom = model.DepartureFromId;
             flight.arriveAt = model.ArrivalAtId;
             flight.departOn = model.DepartOn;
             flight.returnOn = model.ReturnOn;
 
-            _flightRepo.GetFlightByDepartureAndArrivalHour(model.DepartOn, model.ReturnOn);
-            _flightRepo.GetFlightByDepartureAndArrivalLocation(model.DepartureFromId, model.ArrivalAtId);
+            return View("BookedFlight", new List<Flight> { flight });
 
-            return View("BookedFlight", model);
         }
 
         public ActionResult EditTicket(int id)
@@ -122,6 +159,40 @@ namespace AirplaneTrafficManagement.Controllers
             return View("EditTicket", ticketModel);  
         }
 
+        //public ActionResult SaveFlight(BookTicketsViewModel model)
+        //{
+        //    var flight = new Flight();
+        //    var airline = new Airline();
+        //    var passenger = new Passenger();
+        //    var ticket = new Ticket();
+        //    var airportDepature = new Airport();
+
+        //    flight.departureFrom = model.DepartureFromId;
+        //    flight.arriveAt = model.ArrivalAtId;
+        //    flight.departOn = model.DepartOn;
+        //    flight.returnOn = model.ReturnOn;
+
+        //    ticket.idTicket = model.idTicket;
+        //    ticket.roundTrip = model.RoundTrip;
+        //    ticket.seat = model.Seat;
+        //    ticket.@class = model.Class;
+        //    ticket.price = model.Price;
+
+        //    passenger.adult = model.Adult;
+        //    passenger.children = model.Children;
+        //    passenger.infants = model.Infant;
+
+        //    airline.idAirline = model.AirlineId;
+
+        //    _flightRepo.InsertFlight(flight);
+        //    _ticketRepo.InsertTicket(ticket);
+        //    _passengerRepo.InsertPassenger(passenger);
+        //    _airlineRepo.InsertAirline(airline);
+    
+
+        //    return RedirectToAction("FindFlights", "Ticket");
+        //}
+       
         public ActionResult saveChanges(TicketViewModel model)
         {
             var ticket = new Ticket();

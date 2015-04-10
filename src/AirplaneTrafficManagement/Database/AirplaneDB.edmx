@@ -96,6 +96,7 @@
           <Property Name="idAirline" Type="int" />
           <Property Name="idFlight" Type="int" />
           <Property Name="idPassenger" Type="int" />
+          <Property Name="price" Type="float" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -418,6 +419,7 @@
           <NavigationProperty Name="Client" Relationship="AirplaneTrafficModel.FK_Client_Ticket" FromRole="Ticket" ToRole="Client" />
           <NavigationProperty Name="Flight" Relationship="AirplaneTrafficModel.FK_Ticket_Flight" FromRole="Ticket" ToRole="Flight" />
           <NavigationProperty Name="Passenger" Relationship="AirplaneTrafficModel.FK_Ticket_Passenger" FromRole="Ticket" ToRole="Passenger" />
+          <Property Name="price" Type="Double" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -629,6 +631,7 @@
           <EntitySetMapping Name="Ticket">
             <EntityTypeMapping TypeName="AirplaneTrafficModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
                 <ScalarProperty Name="idFlight" ColumnName="idFlight" />
                 <ScalarProperty Name="idAirline" ColumnName="idAirline" />
@@ -662,7 +665,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

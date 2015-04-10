@@ -6,69 +6,59 @@
 <h2>BookFlight</h2>
 
 
-@using (Html.BeginForm("Add", "Ticket"))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
-    @Html.HiddenFor(m => m.idTicket)
+<table class="table table-bordered table-hover">
+    <tr>
+        <th><b>Round Trip</b></th>
+        <th><b>Depart From</b></th>
+        <th><b>Arrival At</b></th>
+        <th><b>Depart On</b></th>
+        <th><b>Return On</b></th>
+        <th><b>Adult</b></th>
+        <th><b>Children</b></th>
+        <th><b>Infant</b></th>
+        <th><b>Seat</b></th>
+        <th><b>Class</b></th>
+        <th><b>Airline</b></th>
+        @*<th><b>Options</b></th>*@
+    </tr>
 
-    <form class="form-inline">  
-        <div class="form-group form-inline">
-                @Html.LabelFor(model => model.RoundTrip, new { htmlAttributes = new { @class = "control-label" } })
-                @Html.CheckBoxFor(model => model.RoundTrip, new { htmlAttributes = new { @checked = "checked" }}) 
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(p => p.DepartureFromId, new { htmlAttributes = new { @class = "control-label" } })
-            @Html.DropDownList("DepartureFromId", null, new { @class = "form-control" } )
-        </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.ArrivalAtId, new { @class = "control-label" })
-                @Html.DropDownList("ArrivalAtId", null, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.DepartOn, new { @class = "control-label" })
-                @Html.EditorFor(model => model.DepartOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DepartOn)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.ReturnOn, new { @class = "control-label" })
-                @Html.EditorFor(model => model.ReturnOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReturnOn)
-            </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Adult, new { @class = "control-label" })
-            @Html.EditorFor(model => model.Adult, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Children, new { @class = "control-label" })
-            @Html.EditorFor(model => model.Children, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class ="form-group">
-            @Html.LabelFor(model => model.Infant, new { @class = "control-label" })
-            @Html.EditorFor(model => model.Infant, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Seat, new { @class = "control-label" })
-            @Html.EditorFor(model => model.Seat, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Class, new { @class = "control-label" })
-            @Html.DropDownList("Class", null, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.AirlineId, new { @class = "control-label" })
-            @Html.DropDownList("AirlineId", null, new { @class = "form-control" })
-        </div>
-     
-        @using (Html.BeginForm("FindFlights", "Ticket"))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary()
-
-            <input type="submit" class="btn btn-default" value="Find Flights" />
-        }
-</form>
-
-}
-
+    @foreach (AirplaneTrafficManagement.Models.BookTicketsViewModel item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(model => item.RoundTrip)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.DepartureFromId)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.ArrivalAtId)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.DepartOn)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.ReturnOn)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Adult)
+            </th>
+            <th>
+            @Html.DisplayFor(modelItem => item.Children)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Infant)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Seat)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Class)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.AirlineId)
+            </th>
+     </tr>
+    }       
+       </table>
+             

@@ -44,6 +44,8 @@ public partial class Ticket
 
     public Nullable<int> idPassenger { get; set; }
 
+    public Nullable<double> price { get; set; }
+
 
 
     public virtual Airline Airline { get; set; }

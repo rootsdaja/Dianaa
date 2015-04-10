@@ -3,7 +3,7 @@
     ViewBag.Title = "EditFlight";
 }
 <h2>EditFlight</h2>
-@using (Html.BeginForm("saveChanges", "Flight"))
+@using (Html.BeginForm("SaveChanges", "Flight"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()

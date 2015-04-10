@@ -28,6 +28,9 @@ namespace AirplaneTrafficManagement.Models
         [Display(Name = "Arrive At")]
         public int ArrivalAtId { get; set; }
 
+        public virtual Airport DepartureFromAirport { get; set; }
+        public virtual Airport ArrivalAtAirport { get; set; }
+
         [DisplayName("Depart On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -37,6 +40,12 @@ namespace AirplaneTrafficManagement.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ReturnOn { get; set; }
+
+        [DisplayName("Price")]
+        public double Price { get; set; }
+
+        public TimeSpan LeavingHour { get; set; }
+        public TimeSpan ArrivalHour { get; set; }
 
         [Display(Name="Airline")]
         public int AirlineId { get; set; }

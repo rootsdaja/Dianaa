@@ -89,6 +89,7 @@
     <EntitySetMapping Name="Ticket">
       <EntityTypeMapping TypeName="AirplaneTrafficModel.Ticket">
         <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="idPassenger" ColumnName="idPassenger" />
           <ScalarProperty Name="idFlight" ColumnName="idFlight" />
           <ScalarProperty Name="idAirline" ColumnName="idAirline" />
